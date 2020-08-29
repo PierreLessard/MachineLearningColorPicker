@@ -11,7 +11,14 @@ def open_batch_data(filename):
         batch_data = pickle.load(fp)
         return(batch_data)
 
+colors = open_batch_data('batch_data_color.txt')
+rgb = open_batch_data('batch_data_rgb.txt')
+
 model = open_batch_data('color_model.pkl')
+
+rgb_pred = model.predict(rgb)
+accuracy=accuracy_score(y_true=colors, y_pred=rgb_pred)
+print("Accuracy: {:.2f}%".format(accuracy*100))
 
 window = Screen()
 window.tracer(0)
